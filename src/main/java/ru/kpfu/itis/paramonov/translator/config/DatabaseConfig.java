@@ -13,13 +13,13 @@ import java.sql.SQLException;
 @PropertySource("classpath:database.properties")
 public class DatabaseConfig {
 
-    @Value("jdbc.driver") private String driver;
+    @Value("${jdbc.driver}") private String driver;
 
-    @Value("jdbc.url") private String url;
+    @Value("${jdbc.url}") private String url;
 
-    @Value("jdbc.user") private String user;
+    @Value("${jdbc.user}") private String user;
 
-    @Value("jdbc.password") private String password;
+    @Value("${jdbc.password}") private String password;
 
     @Bean
     public Connection connection() {

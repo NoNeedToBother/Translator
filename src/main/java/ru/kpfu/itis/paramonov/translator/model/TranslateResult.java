@@ -1,5 +1,10 @@
 package ru.kpfu.itis.paramonov.translator.model;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+@Getter
 public class TranslateResult {
 
     private final String ipAddress;
@@ -8,21 +13,4 @@ public class TranslateResult {
 
     private final String translatedText;
 
-    public TranslateResult(String ipAddress, String originalText, String translatedText) {
-        this.ipAddress = ipAddress;
-        this.originalText = originalText;
-        this.translatedText = translatedText;
-    }
-
-    public String getIpAddress() {
-        return ipAddress;
-    }
-
-    public String getOriginalText() {
-        return originalText;
-    }
-
-    public String getTranslatedText() {
-        return translatedText;
-    }
 }

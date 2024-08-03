@@ -1,5 +1,7 @@
 package ru.kpfu.itis.paramonov.translator.service.impl;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import ru.kpfu.itis.paramonov.translator.dto.TranslateResultDto;
 import ru.kpfu.itis.paramonov.translator.exceptions.DatabaseException;
 import ru.kpfu.itis.paramonov.translator.mappers.TranslateResultMapper;
@@ -8,17 +10,13 @@ import ru.kpfu.itis.paramonov.translator.service.TranslateResultService;
 
 import java.sql.SQLException;
 
+@Service
+@RequiredArgsConstructor
 public class TranslateResultServiceImpl implements TranslateResultService {
 
     private final TranslateResultRepository translateResultRepository;
 
     private final TranslateResultMapper translateResultMapper;
-
-    public TranslateResultServiceImpl(TranslateResultRepository translateResultRepository,
-                                      TranslateResultMapper translateResultMapper) {
-        this.translateResultRepository = translateResultRepository;
-        this.translateResultMapper = translateResultMapper;
-    }
 
     private static final String SAVE_TRANSLATE_RESULT_ERROR = "Failed to save translate result";
 

@@ -1,8 +1,10 @@
 package ru.kpfu.itis.paramonov.translator.mappers;
 
+import org.springframework.stereotype.Component;
 import ru.kpfu.itis.paramonov.translator.dto.TranslateResultDto;
 import ru.kpfu.itis.paramonov.translator.model.TranslateResult;
 
+@Component
 public class TranslateResultMapper {
 
     public TranslateResult fromDto(TranslateResultDto dto) {
