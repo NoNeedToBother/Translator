@@ -17,7 +17,7 @@ public class TranslateResultRepositoryImpl implements TranslateResultRepository 
 
     private static final String DB_TRANSLATED_TEXT_FIELD_NAME = "translated_text";
 
-    private static final String DB_TRANSLATE_RESULT_TABLE_NAME = "translate_result";
+    private static final String DB_TRANSLATE_RESULT_TABLE_NAME = "translate_results";
 
     private final Connection connection;
 
