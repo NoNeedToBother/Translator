@@ -19,7 +19,6 @@ import java.util.concurrent.*;
 @PropertySource("classpath:translate_api.properties")
 @RequiredArgsConstructor
 public class TranslationServiceImpl implements TranslationService {
-
     @Value("${rapid.api.url}") private String rapidApiUrl;
 
     private final RestTemplate translateClient;
@@ -45,7 +44,7 @@ public class TranslationServiceImpl implements TranslationService {
         ExecutorService executorService = Executors.newFixedThreadPool(MAX_TRANSLATION_THREAD_AMOUNT);
 
         String result;
-        try  {
+        try {
             result = String.join(" ", processTranslations(words, uri, executorService));
         } finally {
             executorService.shutdown();

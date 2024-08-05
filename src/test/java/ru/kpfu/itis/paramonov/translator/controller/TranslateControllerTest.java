@@ -10,7 +10,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import ru.kpfu.itis.paramonov.translator.dto.TranslateResultDto;
 import ru.kpfu.itis.paramonov.translator.dto.request.TranslateRequestDto;
 import ru.kpfu.itis.paramonov.translator.exceptions.DatabaseException;
 import ru.kpfu.itis.paramonov.translator.service.TranslateResultService;
@@ -42,8 +41,6 @@ public class TranslateControllerTest {
         given(translationService.translate("ru", "en", "Привет мир"))
                 .willReturn("Hello world");
         when(request.getRemoteAddr()).thenReturn("127.0.0.1");
-        TranslateResultDto translateResultDto = new TranslateResultDto("127.0.0.1", "Привет мир", "Hello world");
-        doNothing().when(translateResultService).save(translateResultDto);
 
         TranslateRequestDto translateRequestDto = new TranslateRequestDto("ru", "en", "Привет мир");
 
