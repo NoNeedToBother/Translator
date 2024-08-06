@@ -15,6 +15,7 @@ import ru.kpfu.itis.paramonov.translator.service.TranslationService;
 
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.stream.Collectors;
 
 @Service
 @PropertySource("classpath:translate_api.properties")
@@ -31,7 +32,7 @@ public class TranslationServiceImpl implements TranslationService {
     private static final long REQUEST_TIMEOUT = 10000L;
 
     private static final String TIMEOUT_ERROR = "Getting translation takes too long, try again later";
-    private static final String TRANSLATION_ERROR = "Error occurred when translating, try again later";
+    private static final String TRANSLATION_ERROR = "Error occurred when translating";
     private static final String INCORRECT_LANGUAGE_CODE_LENGTH_ERROR = "Language codes should contain two characters";
 
     private static final int LANGUAGE_CODE_LENGTH = 2;
@@ -62,7 +63,7 @@ public class TranslationServiceImpl implements TranslationService {
     private List<String> processTranslations(String[] words, String uri, ExecutorService executorService) {
         List<Future<String>> futures = Arrays.stream(words)
                 .map(word -> executorService.submit(() -> translateWord(uri, word)))
-                .toList();
+                .collect(Collectors.toList());
 
         return futures.stream()
                 .map(future -> {
@@ -74,7 +75,7 @@ public class TranslationServiceImpl implements TranslationService {
                         throw new TranslationException(TRANSLATION_ERROR);
                     }
                 })
-                .toList();
+                .collect(Collectors.toList());
     }
 
     private String translateWord(String uri, String word) {

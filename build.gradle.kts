@@ -1,18 +1,16 @@
 plugins {
-    java
-    war
-    id("org.springframework.boot") version "3.3.2"
-    id("io.spring.dependency-management") version "1.1.6"
+    id("java")
+    id("org.springframework.boot") version "2.7.17"
     kotlin("jvm")
 }
+
+apply(plugin = "io.spring.dependency-management")
 
 group = "ru.kpfu.itis.paramonov"
 version = "0.0.1-SNAPSHOT"
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
+kotlin {
+    jvmToolchain(8)
 }
 
 configurations {
@@ -27,7 +25,6 @@ repositories {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
-    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     implementation("org.postgresql:postgresql:42.7.2")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
