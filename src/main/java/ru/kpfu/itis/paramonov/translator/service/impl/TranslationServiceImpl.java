@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+import ru.kpfu.itis.paramonov.translator.exceptions.BadRequestException;
 import ru.kpfu.itis.paramonov.translator.exceptions.TranslationException;
 import ru.kpfu.itis.paramonov.translator.service.TranslationService;
 
@@ -31,10 +32,15 @@ public class TranslationServiceImpl implements TranslationService {
 
     private static final String TIMEOUT_ERROR = "Getting translation takes too long, try again later";
     private static final String TRANSLATION_ERROR = "Error occurred when translating, try again later";
+    private static final String INCORRECT_LANGUAGE_CODE_LENGTH_ERROR = "Language codes should contain two characters";
 
+    private static final int LANGUAGE_CODE_LENGTH = 2;
 
     @Override
     public String translate(String originalLang, String targetLang, String text) {
+        if (originalLang.length() != LANGUAGE_CODE_LENGTH || targetLang.length() != LANGUAGE_CODE_LENGTH) {
+            throw new BadRequestException(INCORRECT_LANGUAGE_CODE_LENGTH_ERROR);
+        }
         String uri = UriComponentsBuilder.fromUriString(rapidApiUrl)
                 .queryParam(ORIGINAL_LANGUAGE_QUERY_PARAM, originalLang)
                 .queryParam(TARGET_LANGUAGE_QUERY_PARAM, targetLang)
